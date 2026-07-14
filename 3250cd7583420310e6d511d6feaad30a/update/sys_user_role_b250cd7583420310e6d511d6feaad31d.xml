@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description>Student role for viewing sports halls, booking facilities, and managing personal bookings.</description>
+        <elevated_privilege>false</elevated_privilege>
+        <federated_id>c/ic66mC2ALlHpm2FBKIJjU1kUTpdBfyP4PVn61ZAvk=</federated_id>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_2112820_sports_2.sports_hall_booking.user</name>
+        <scoped_admin>false</scoped_admin>
+        <suffix>sports_hall_booking.user</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 14:28:25</sys_created_on>
+        <sys_id>b250cd7583420310e6d511d6feaad31d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_2112820_sports_2.sports_hall_booking.user</sys_name>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_user_role_b250cd7583420310e6d511d6feaad31d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 14:28:25</sys_updated_on>
+    </sys_user_role>
+</record_update>

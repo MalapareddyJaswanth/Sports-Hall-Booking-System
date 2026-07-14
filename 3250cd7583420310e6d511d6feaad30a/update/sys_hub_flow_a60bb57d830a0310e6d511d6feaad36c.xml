@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=integrated,timeFromCreateToActivate=82736000,viewActivatedIn=diagramming</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from>9a41b6c2ff12101088e94ee9453bf1a4</copied_from>
+        <copied_from_name>FlowTemplate_Empty</copied_from_name>
+        <description>Sends confirmation notification when a sports hall booking is created.</description>
+        <display_name_after_preview/>
+        <flow_priority/>
+        <generation_source/>
+        <internal_name>booking_confirmation_flow</internal_name>
+        <label_cache>[{"name":"Created_1.current.student.email","label":"Trigger - Record Created➛Booking Record➛Student➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"42f94cc6-5d11-439d-914f-2b0ec763d014":["ah_to"]}},{"name":"Created_1.current.student","label":"Trigger - Record Created➛Booking Record➛Student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","parent_table_name":"x_2112820_sports_2_booking","column_name":"student","usedInstances":{}},{"name":"Created_1.current","label":"Trigger - Record Created➛Booking Record","reference":"x_2112820_sports_2_booking","reference_display":"Booking","type":"reference","base_type":"reference","usedInstances":{"1b252bf8-208d-4e67-80c6-8a10c86cea89":["record"],"42f94cc6-5d11-439d-914f-2b0ec763d014":["record"]},"attributes":{}}]</label_cache>
+        <master_snapshot>ace0720e838e8310e6d511d6feaad3c7</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Booking Confirmation Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>42a6fa0a83ce8310e6d511d6feaad3f0</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:44:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a60bb57d830a0310e6d511d6feaad36c</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>Booking Confirmation Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_hub_flow_a60bb57d830a0310e6d511d6feaad36c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>d2a63e0a83ce8310e6d511d6feaad35c</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_variable_value action="delete_multiple" query="document_key=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_2112820_sports_2_booking">^EQ<item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>true</on_insert>
+        <on_update>false</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>true</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:43:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>42a6fa0a83ce8310e6d511d6feaad3f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <table>x_2112820_sports_2_booking</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"true"}</data>
+        <identifier>a60bb57d830a0310e6d511d6feaad36c</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:43:45</sys_created_on>
+        <sys_id>4ea6fa0a83ce8310e6d511d6feaad3f0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <trigger display_value="">42a6fa0a83ce8310e6d511d6feaad3f0</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT IN4ea6fa0a83ce8310e6d511d6feaad3f0"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT IN620bb57d830a0310e6d511d6feaad371"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>a60bb57d830a0310e6d511d6feaad36c</id>
+        <name>Booking Confirmation Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:44:48</sys_created_on>
+        <sys_id>620bb57d830a0310e6d511d6feaad371</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 18:44:48</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=620bb57d830a0310e6d511d6feaad371"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT IN08ed31f1834a0310e6d511d6feaad355,7bdd31f1834a0310e6d511d6feaad332"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Booking Confirmation Flow">a60bb57d830a0310e6d511d6feaad36c</model>
+        <model_id>a60bb57d830a0310e6d511d6feaad36c</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_a60bb57d830a0310e6d511d6feaad36c</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:57:11</sys_created_on>
+        <sys_id>08ed31f1834a0310e6d511d6feaad355</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=08ed31f1834a0310e6d511d6feaad355"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Booking Confirmation Flow">a60bb57d830a0310e6d511d6feaad36c</model>
+        <model_id>a60bb57d830a0310e6d511d6feaad36c</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_a60bb57d830a0310e6d511d6feaad36c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:57:11</sys_created_on>
+        <sys_id>7bdd31f1834a0310e6d511d6feaad332</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=7bdd31f1834a0310e6d511d6feaad332"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT INd3b47a0683ce8310e6d511d6feaad3d2"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Booking Confirmation Flow">a60bb57d830a0310e6d511d6feaad36c</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:35:22</sys_created_on>
+        <sys_id>d3b47a0683ce8310e6d511d6feaad3d2</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:44</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VYXXPaOBT9Kx4/bWfojD8gQN7aJJ3NTLeZJXT3IZP1yLYEmgqJ2rIT2sl/3yt/gLFlPgK05IlBEtK5R+eee8XDT5MhHzPz0hwjn2GzY1IuccQRGy/mGIalGvY4mqm5GeIhkiJamJcySnDHJJGYjfFszpCExQSxGAZFFOLIvLQ7ZopYgu8X8W0IO8Hvs22KPc1iGr4/e45tOwPH8uK5iGTsOZ4vxDfKJ7AopDFsv/inWPtxORFMKQsjzM3Lh8eOOUcRbC7VwT9rU1SdHpAADR1sBa7tOo5lOYOu7V+4vu2ELsKWBRvWmaihlRpCVqHiZ4l5iMMlCw2uIozCO84WyxVToDrnZYaeY/oDdh9Yah3BgD3A+dzyq1cwkQ8HU0EDfDeXVPB8JMeZTwqWzPiXHL/iEBOUMFlyCCNJDPvhuYKsQBSIyP1UPI3KAz9RnkVXTDIRILb8hqSMqJ9IHCvCCWVAvZdzE4skytCPbq7uRtfevx/GV3/ejLzRzf14dHs1vrk2X7K4vO+J2jFHWGDx8nBelhf/iWKmLpAnMx/QdMw4iOhcfggkTUvNvXRWOr4SPKQZKw0tB+VUvK7lMvpNYrasVjkHlRNLSf9383dTu/ngfrq9uEAoxKhFtz6p6LYauQaa1JBQjW6TgouRXSTctazfJOLCkl6r4SfEwXqk8FAYehWWIOVhYxWiCDG7Xp0H43QyAdlTPk9kvFXUeWwvWxUcJRx+4C3vo6njjLYlf59pDGgeIAvv8fckJ/09WBIpqSrwk8/FAaOEG4IbQRIBR9KAazbKw4wMpJIGuZ2hSUE0bMxwICvaIF/j6re/aBwrV14F04YlW9AEwxZVRKXlHoLh8Zgp3rySdJ3b/ZLatgnxMXGsvkpp23J9Ylt9q4dI6FpW4FSSunlyKyRZU8dJknu/1I4zXbIdrjqt6aMAb1UTYyfd1i6mJEHpoXCQq+NAs48EzVHQak7o7mWFJbBi+Hq96mwK7chtAApTBL8IyxhfUea3F3glfMLEE9ju4dZIRIQnkUh4WPckdYRB4XNtxWlM0UfBt80oViuMP4prfnduBrm6lFQX134W6RLbH+IutsAZXTBFvzcc+gFyCOlf9LFj1yxydbYW0Juwxi13rSW1zSa16k11ot/DIA8A2DDLvQEebpOIL1pNMp97q3b4NMXcA/CRx5ThNVxxwmiIy7njJn3j6HTVn9eeP3t7ABkMg57d7wd9ePeAB5Au9pHddXpo2L9wB72aBzSgbIIpNcz8ktdQvIgzIC3+8DWfOq/n/WuEvKtsYyxl/ofOgaU8+znKz6tUUXVDRuY4IjIUu8btaqFxj6EmZs/jU5V2IaeNog5IPsL4GhLVMn4R/L0G3QmfYxyeELsQ14Ls3FqQmqLS9Us41I9s3B30hsTV+xEZ6vxoBaYd5tl3JztKIW0Vla5N2TUxU21+t/YVr8itmkyqDceGjuhYpNhHJ8U5HSnuwV1YmYutb9XXgH1D9S5rQo5W9ATHniBa26bEKP6gxKHhLww5xcAtg74bTjYUjBPWlbyfblQ9GDaK5udkBU3dSZ2Ua2HAhBH9ElpOU9VquknXHzUHVjYc9lGv57Z02sP6a1sHaAves69xe0sk1SluY6Hbb9/6ntpSV0modUXsWMSOGrW+kh0WtbaWbYv68Cq16b8CDYozrT+P/wM5ic8p4B8AAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT IN7d3f6e0a838e8310e6d511d6feaad322"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Booking Confirmation Flow">a60bb57d830a0310e6d511d6feaad36c</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:11:15</sys_created_on>
+        <sys_id>7d3f6e0a838e8310e6d511d6feaad322</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 18:12:50</sys_updated_on>
+        <ui_id>42f94cc6-5d11-439d-914f-2b0ec763d014</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1YUW/iOBD+K1Z0jxwNUGjp2y6o6krdXamgPZ22q8hxnOKrE+dspy1b8d9vnDgJAS4bFlbX6vqE4rE938x8n8fm67PDAufCOQ3O3ZEfnuIzd9AfuO55fzz2B+PQPT8buz0SOB0nxhGFmZISIc33A+apGXh+nkiKNQ28XpekUtJYr1ZgD5hKOF5+sdNghCwYD8DuXHz91nESLGFHTaVz8bxhaguJY59ymDrH8o5qdFNA24Sql4n5DgRJI4DnsWLw2m4wtRb0YQoWWGRQuR2HPmkaBxTghJgr2nEiHAdYC7ksRyD24HPMq4EFizVs+U4pQRjkRSG9oIhGmHH0yPQCYZQD6zpmvyfFvgO4Qd9sFVLIATFYWUxYAIictWHPphTMHypzOMUaz7RMiU5lmWnBCFV5NgMa4pTryfpYPuFzopmI8yUa+7xYLXgaxZ/yJDrlBmuVTBWAoYnJjQkWnEPg4WwhHm8KsJcszrJos8IFwbz8CmcUS7K4ZJSbUsdp5MPcjoO1lsxPtYEJpOAwq/LjZVCNL5hJOc1KGeEkYfGdl0jxwDKHAD/q3nH46IZcPMJ6xe7iLiYm1i5UD3cvYXyaDX/BkpnAP8I2sHjVcdRSTThWqgof8u/9nRr0eTLqcMxqLyOcWUwkS/Q7cPVAbbCrjpVYb9zE5+C04u3anpXMnrx+r9c/77ueSoTUyut7vhD3EPu21t6Xhv0k1wJiJTlDl92Qrdy2xq7X16JPucGKrben2HLKWa3NQWA6PwNyaSFt4ZX6Onfr+voXXb0MPZUqaS2ounB+jTiAJMrLGW5jy5z/hGh+JBV3NPL9kT88G1Q8HJMwOPPDET4jg4p3j3DAygjLey87YNf00tuWhT069tNECyyFJuBQ5mlA0R8FqCacViSgYTjl4k2FANKTyyy7pUL6B7WjnJpICwTF5EtoQiUkM1i1KL3AGjGFFFSri+YCMRvV2ooOWooURanSME2DpSa+Wl87fbm6s3Swo9OdXHkVwjy+AIfNjQBXxMYLT4vm22BX6dS47mYEW63QtjJbrtpPuS2CKLuZ2I7IClRB/bJWuq7PWTFotTlo1mberLakudac3Jcrk9eiAgOcs4hlhMj1e3xhBI2com6NRoSsCeMIL6IWzgtCTybbSPYh9OnPNZs3Rr86Rvcan9l0VOORf2xKt/BeUPr9Bqf9vUk9fCP1/4TUw2ZakRqRVOr/RYleI/Yse2GjK8w5sm9pNBFxyOD2m9Vmi/gtVux5eflxBIUwZiX+XTHtI5DR2zXmP9fH8cWAG6kU9uunqgiWa0q4TV13QBJkMP+uWbyMCJVCaB8Sc58Zg1vnNp9GryjnopMvOUnysdt4ry3+FKlE+R9caGHEZP/jgg+FfEpjpFICfFBhyuEVS/JXQ/cgn4Vep1TDS0Nd5It9aYMCFBfot2fzu6qbgMLUmMoN4HtjypxFFM240GZe+bE6CO98geP77AUeColSZVyb9/uuM2i2VJpGh+Xnht5hGahOPbJd3uYUR3VX2yeldd2CMb+CEc0VRycNNS+MjVUvJu1X92PXdXfdCmytK7dfx2pxzJRXufyQ2Tp1bK9a6IhvdKqr+cfrqk+dHXiRGw2Hg9Fbpzr4Jpc8Bv1AiiSxsR35NvftHw2FE76eHAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=7d3f6e0a838e8310e6d511d6feaad322"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a60bb57d830a0310e6d511d6feaad36c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:57:11</sys_created_on>
+        <sys_id>00ed31f1834a0310e6d511d6feaad350</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 18:57:11</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a60bb57d830a0310e6d511d6feaad36c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 18:57:11</sys_created_on>
+        <sys_id>c8ed31f1834a0310e6d511d6feaad35c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 18:57:11</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_a60bb57d830a0310e6d511d6feaad36c"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=integrated,viewActivatedIn=diagramming</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from>9a41b6c2ff12101088e94ee9453bf1a4</copied_from>
+        <copied_from_name/>
+        <description>Sends confirmation notification when a sports hall booking is created.</description>
+        <flow_priority/>
+        <internal_name>booking_confirmation_flow</internal_name>
+        <label_cache>[{"name":"Created_1.current.student.email","label":"Trigger - Record Created➛Booking Record➛Student➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"42f94cc6-5d11-439d-914f-2b0ec763d014":["ah_to"]}},{"name":"Created_1.current.student","label":"Trigger - Record Created➛Booking Record➛Student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","parent_table_name":"x_2112820_sports_2_booking","column_name":"student","usedInstances":{}},{"name":"Created_1.current","label":"Trigger - Record Created➛Booking Record","reference":"x_2112820_sports_2_booking","reference_display":"Booking","type":"reference","base_type":"reference","usedInstances":{"1b252bf8-208d-4e67-80c6-8a10c86cea89":["record"],"42f94cc6-5d11-439d-914f-2b0ec763d014":["record"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Booking Confirmation Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Booking Confirmation Flow">a60bb57d830a0310e6d511d6feaad36c</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ace0720e838e8310e6d511d6feaad3c7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=ace0720e838e8310e6d511d6feaad3c7^sys_idNOT INe8e0720e838e8310e6d511d6feaad3d6"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>ace0720e838e8310e6d511d6feaad3c7</id>
+        <name>Booking Confirmation Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>e8e0720e838e8310e6d511d6feaad3d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:32</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=e8e0720e838e8310e6d511d6feaad3d6"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=ace0720e838e8310e6d511d6feaad3c7^sys_idNOT IN6ce0720e838e8310e6d511d6feaad3d8,a0e0720e838e8310e6d511d6feaad3eb"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Booking Confirmation Flow">ace0720e838e8310e6d511d6feaad3c7</model>
+        <model_id>ace0720e838e8310e6d511d6feaad3c7</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_ace0720e838e8310e6d511d6feaad3c7</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>6ce0720e838e8310e6d511d6feaad3d8</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=6ce0720e838e8310e6d511d6feaad3d8"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Booking Confirmation Flow">ace0720e838e8310e6d511d6feaad3c7</model>
+        <model_id>ace0720e838e8310e6d511d6feaad3c7</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_ace0720e838e8310e6d511d6feaad3c7</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>a0e0720e838e8310e6d511d6feaad3eb</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a0e0720e838e8310e6d511d6feaad3eb"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=ace0720e838e8310e6d511d6feaad3c7^sys_idNOT IN2ce0b20e838e8310e6d511d6feaad31a"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Booking Confirmation Flow">ace0720e838e8310e6d511d6feaad3c7</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>2ce0b20e838e8310e6d511d6feaad31a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VYXXPaOBT9Kx4/bWfojD8gQN7aJJ3NTLeZJXT3IZP1yLYEmgqJ2rIT2sl/3yt/gLFlPgK05IlBEtK5R+eee8XDT5MhHzPz0hwjn2GzY1IuccQRGy/mGIalGvY4mqm5GeIhkiJamJcySnDHJJGYjfFszpCExQSxGAZFFOLIvLQ7ZopYgu8X8W0IO8Hvs22KPc1iGr4/e45tOwPH8uK5iGTsOZ4vxDfKJ7AopDFsv/inWPtxORFMKQsjzM3Lh8eOOUcRbC7VwT9rU1SdHpAADR1sBa7tOo5lOYOu7V+4vu2ELsKWBRvWmaihlRpCVqHiZ4l5iMMlCw2uIozCO84WyxVToDrnZYaeY/oDdh9Yah3BgD3A+dzyq1cwkQ8HU0EDfDeXVPB8JMeZTwqWzPiXHL/iEBOUMFlyCCNJDPvhuYKsQBSIyP1UPI3KAz9RnkVXTDIRILb8hqSMqJ9IHCvCCWVAvZdzE4skytCPbq7uRtfevx/GV3/ejLzRzf14dHs1vrk2X7K4vO+J2jFHWGDx8nBelhf/iWKmLpAnMx/QdMw4iOhcfggkTUvNvXRWOr4SPKQZKw0tB+VUvK7lMvpNYrasVjkHlRNLSf9383dTu/ngfrq9uEAoxKhFtz6p6LYauQaa1JBQjW6TgouRXSTctazfJOLCkl6r4SfEwXqk8FAYehWWIOVhYxWiCDG7Xp0H43QyAdlTPk9kvFXUeWwvWxUcJRx+4C3vo6njjLYlf59pDGgeIAvv8fckJ/09WBIpqSrwk8/FAaOEG4IbQRIBR9KAazbKw4wMpJIGuZ2hSUE0bMxwICvaIF/j6re/aBwrV14F04YlW9AEwxZVRKXlHoLh8Zgp3rySdJ3b/ZLatgnxMXGsvkpp23J9Ylt9q4dI6FpW4FSSunlyKyRZU8dJknu/1I4zXbIdrjqt6aMAb1UTYyfd1i6mJEHpoXCQq+NAs48EzVHQak7o7mWFJbBi+Hq96mwK7chtAApTBL8IyxhfUea3F3glfMLEE9ju4dZIRIQnkUh4WPckdYRB4XNtxWlM0UfBt80oViuMP4prfnduBrm6lFQX134W6RLbH+IutsAZXTBFvzcc+gFyCOlf9LFj1yxydbYW0Juwxi13rSW1zSa16k11ot/DIA8A2DDLvQEebpOIL1pNMp97q3b4NMXcA/CRx5ThNVxxwmiIy7njJn3j6HTVn9eeP3t7ABkMg57d7wd9ePeAB5Au9pHddXpo2L9wB72aBzSgbIIpNcz8ktdQvIgzIC3+8DWfOq/n/WuEvKtsYyxl/ofOgaU8+znKz6tUUXVDRuY4IjIUu8btaqFxj6EmZs/jU5V2IaeNog5IPsL4GhLVMn4R/L0G3QmfYxyeELsQ14Ls3FqQmqLS9Us41I9s3B30hsTV+xEZ6vxoBaYd5tl3JztKIW0Vla5N2TUxU21+t/YVr8itmkyqDceGjuhYpNhHJ8U5HSnuwV1YmYutb9XXgH1D9S5rQo5W9ATHniBa26bEKP6gxKHhLww5xcAtg74bTjYUjBPWlbyfblQ9GDaK5udkBU3dSZ2Ua2HAhBH9ElpOU9VquknXHzUHVjYc9lGv57Z02sP6a1sHaAves69xe0sk1SluY6Hbb9/6ntpSV0modUXsWMSOGrW+kh0WtbaWbYv68Cq16b8CDYozrT+P/wM5ic8p4B8AAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=ace0720e838e8310e6d511d6feaad3c7^sys_idNOT INe4e0b20e838e8310e6d511d6feaad318"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Booking Confirmation Flow">ace0720e838e8310e6d511d6feaad3c7</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>e4e0b20e838e8310e6d511d6feaad318</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:32</sys_updated_on>
+        <ui_id>42f94cc6-5d11-439d-914f-2b0ec763d014</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1YUW/iOBD+K1Z0jxwNUGjp2y6o6krdXamgPZ22q8hxnOKrE+dspy1b8d9vnDgJAS4bFlbX6vqE4rE938x8n8fm67PDAufCOQ3O3ZEfnuIzd9AfuO55fzz2B+PQPT8buz0SOB0nxhGFmZISIc33A+apGXh+nkiKNQ28XpekUtJYr1ZgD5hKOF5+sdNghCwYD8DuXHz91nESLGFHTaVz8bxhaguJY59ymDrH8o5qdFNA24Sql4n5DgRJI4DnsWLw2m4wtRb0YQoWWGRQuR2HPmkaBxTghJgr2nEiHAdYC7ksRyD24HPMq4EFizVs+U4pQRjkRSG9oIhGmHH0yPQCYZQD6zpmvyfFvgO4Qd9sFVLIATFYWUxYAIictWHPphTMHypzOMUaz7RMiU5lmWnBCFV5NgMa4pTryfpYPuFzopmI8yUa+7xYLXgaxZ/yJDrlBmuVTBWAoYnJjQkWnEPg4WwhHm8KsJcszrJos8IFwbz8CmcUS7K4ZJSbUsdp5MPcjoO1lsxPtYEJpOAwq/LjZVCNL5hJOc1KGeEkYfGdl0jxwDKHAD/q3nH46IZcPMJ6xe7iLiYm1i5UD3cvYXyaDX/BkpnAP8I2sHjVcdRSTThWqgof8u/9nRr0eTLqcMxqLyOcWUwkS/Q7cPVAbbCrjpVYb9zE5+C04u3anpXMnrx+r9c/77ueSoTUyut7vhD3EPu21t6Xhv0k1wJiJTlDl92Qrdy2xq7X16JPucGKrben2HLKWa3NQWA6PwNyaSFt4ZX6Onfr+voXXb0MPZUqaS2ounB+jTiAJMrLGW5jy5z/hGh+JBV3NPL9kT88G1Q8HJMwOPPDET4jg4p3j3DAygjLey87YNf00tuWhT069tNECyyFJuBQ5mlA0R8FqCacViSgYTjl4k2FANKTyyy7pUL6B7WjnJpICwTF5EtoQiUkM1i1KL3AGjGFFFSri+YCMRvV2ooOWooURanSME2DpSa+Wl87fbm6s3Swo9OdXHkVwjy+AIfNjQBXxMYLT4vm22BX6dS47mYEW63QtjJbrtpPuS2CKLuZ2I7IClRB/bJWuq7PWTFotTlo1mberLakudac3Jcrk9eiAgOcs4hlhMj1e3xhBI2com6NRoSsCeMIL6IWzgtCTybbSPYh9OnPNZs3Rr86Rvcan9l0VOORf2xKt/BeUPr9Bqf9vUk9fCP1/4TUw2ZakRqRVOr/RYleI/Yse2GjK8w5sm9pNBFxyOD2m9Vmi/gtVux5eflxBIUwZiX+XTHtI5DR2zXmP9fH8cWAG6kU9uunqgiWa0q4TV13QBJkMP+uWbyMCJVCaB8Sc58Zg1vnNp9GryjnopMvOUnysdt4ry3+FKlE+R9caGHEZP/jgg+FfEpjpFICfFBhyuEVS/JXQ/cgn4Vep1TDS0Nd5It9aYMCFBfot2fzu6qbgMLUmMoN4HtjypxFFM240GZe+bE6CO98geP77AUeColSZVyb9/uuM2i2VJpGh+Xnht5hGahOPbJd3uYUR3VX2yeldd2CMb+CEc0VRycNNS+MjVUvJu1X92PXdXfdCmytK7dfx2pxzJRXufyQ2Tp1bK9a6IhvdKqr+cfrqk+dHXiRGw2Hg9Fbpzr4Jpc8Bv1AiiSxsR35NvftHw2FE76eHAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=e4e0b20e838e8310e6d511d6feaad318"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_ace0720e838e8310e6d511d6feaad3c7</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>e4e0720e838e8310e6d511d6feaad3e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:32</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_ace0720e838e8310e6d511d6feaad3c7</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:32</sys_created_on>
+        <sys_id>e4e0720e838e8310e6d511d6feaad3f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:18:32</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_ace0720e838e8310e6d511d6feaad3c7"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>a60bb57d830a0310e6d511d6feaad36c</sys_id>
+        <latest_snapshot>ace0720e838e8310e6d511d6feaad3c7</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch2-04-17-2026_04-29-2026_2044.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=a60bb57d830a0310e6d511d6feaad36c^sys_idNOT INb8e0b20e838e8310e6d511d6feaad33b"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"b8e0b20e838e8310e6d511d6feaad33b","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>a60bb57d830a0310e6d511d6feaad36c</plan_id>
+        <snapshot>c85d36868302c310e6d511d6feaad3f9</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 17:18:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b8e0b20e838e8310e6d511d6feaad33b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 17:43:45</sys_updated_on>
+        <trigger display_value="">42a6fa0a83ce8310e6d511d6feaad3f0</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=a60bb57d830a0310e6d511d6feaad36c"/>
+</record_update>

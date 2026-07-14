@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="18b58d3183820310e6d511d6feaad3f1" label="Time Slot" max_length="40" name="x_2112820_sports_2_time_slot" type="collection">
+        <element choice="1" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
+                <element inactive_on_update="false" label="Available" sequence="1" value="available"/>
+                <element inactive_on_update="false" label="Booked" sequence="2" value="booked"/>
+                <element inactive_on_update="false" label="Unavailable" sequence="3" value="unavailable"/>
+            </choice>
+        </element>
+        <element label="Start Time" max_length="40" name="start_time" type="glide_time"/>
+        <element label="End Time" max_length="40" name="end_time" type="glide_time"/>
+        <element label="Sports Hall" max_length="32" name="sports_hall" reference="x_2112820_sports_2_sports_hall" type="reference"/>
+        <element display="true" label="Slot Name" max_length="40" name="slot_name" type="string"/>
+        <index name="index">
+            <element name="sports_hall"/>
+        </index>
+    </element>
+</database>
