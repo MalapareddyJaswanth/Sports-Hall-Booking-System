@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_2112820_sports_2_booking</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Prevent Duplicate Booking</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+
+    var gr = new GlideRecord('x_2112820_sports_2_booking');
+
+    gr.addQuery('sports_hall', current.sports_hall);
+    gr.addQuery('booking_date', current.booking_date);
+    gr.addQuery('time_slot', current.time_slot);
+    gr.addQuery('booking_status', 'Approved');
+
+    gr.query();
+
+    if (gr.next()) {
+        gs.addErrorMessage("This sports hall is already booked for the selected date and time.");
+        current.setAbortAction(true);
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-14 19:08:15</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>49f88b4e8342c310e6d511d6feaad364</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Prevent Duplicate Booking</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_script_49f88b4e8342c310e6d511d6feaad364</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-14 19:08:15</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=49f88b4e8342c310e6d511d6feaad364"/>
+</record_update>

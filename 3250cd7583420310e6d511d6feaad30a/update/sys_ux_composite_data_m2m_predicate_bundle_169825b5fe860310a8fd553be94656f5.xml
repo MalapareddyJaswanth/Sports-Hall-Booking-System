@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data_m2m_predicate_bundle">
+    <sys_ux_composite_data_m2m_predicate_bundle action="INSERT_OR_UPDATE">
+        <dataset display_value="Custom Portal Landing - Popular Articles">1a9825b5da8603109362403bf15a06f9</dataset>
+        <order/>
+        <predicate_bundle display_value="Popular articles bundle">169825b5b98603109516be6b5efc4ff4</predicate_bundle>
+        <sys_class_name>sys_ux_composite_data_m2m_predicate_bundle</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 17:24:18</sys_created_on>
+        <sys_id>169825b5fe860310a8fd553be94656f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_ux_composite_data_m2m_predicate_bundle_169825b5fe860310a8fd553be94656f5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 17:24:18</sys_updated_on>
+    </sys_ux_composite_data_m2m_predicate_bundle>
+</record_update>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="a755c13183820310e6d511d6feaad31d" label="Booking" max_length="40" name="x_2112820_sports_2_booking" type="collection">
+        <element label="Remarks" max_length="100" name="remarks" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" mandatory="true" max_length="40" name="number" type="string"/>
+        <element label="Sports Hall" mandatory="true" max_length="32" name="sports_hall" reference="x_2112820_sports_2_sports_hall" type="reference"/>
+        <element choice="1" default="pending" label="Booking Status" max_length="40" name="booking_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Approved" sequence="1" value="approved"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="3" value="cancelled"/>
+                <element inactive_on_update="false" label="Pending" sequence="0" value="pending"/>
+                <element inactive_on_update="false" label="Rejected" sequence="2" value="rejected"/>
+                <element inactive_on_update="false" label="Completed" sequence="4" value="completed"/>
+            </choice>
+        </element>
+        <element label="Booking Date" mandatory="true" max_length="40" name="booking_date" type="glide_date"/>
+        <element label="Time Slot" mandatory="true" max_length="32" name="time_slot" reference="x_2112820_sports_2_time_slot" type="reference"/>
+        <element label="Student" mandatory="true" max_length="32" name="student" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="sports_hall"/>
+        </index>
+        <index name="index2">
+            <element name="student"/>
+        </index>
+        <index name="index3">
+            <element name="time_slot"/>
+        </index>
+    </element>
+</database>

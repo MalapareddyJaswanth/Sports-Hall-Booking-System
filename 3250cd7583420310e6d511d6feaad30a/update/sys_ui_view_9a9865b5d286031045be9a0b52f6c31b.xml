@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>custom_portal_settings_x_2112820_sports_2</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 17:24:19</sys_created_on>
+        <sys_id>9a9865b5d286031045be9a0b52f6c31b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Custom portal settings (x_2112820_sports_2)</sys_name>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_ui_view_9a9865b5d286031045be9a0b52f6c31b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 17:24:19</sys_updated_on>
+        <title>Custom portal settings (x_2112820_sports_2)</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

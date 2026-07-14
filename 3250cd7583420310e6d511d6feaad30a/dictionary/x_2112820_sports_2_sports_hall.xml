@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="203149f583420310e6d511d6feaad395" label="Sports Hall" max_length="40" name="x_2112820_sports_2_sports_hall" type="collection">
+        <element label="Description" max_length="100" name="description" type="string"/>
+        <element choice="1" label="Availability Status" max_length="40" name="availability_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Available" sequence="0" value="available"/>
+                <element inactive_on_update="false" label="Closed" sequence="2" value="closed"/>
+                <element inactive_on_update="false" label="Under Maintenance" sequence="1" value="under_maintenance"/>
+            </choice>
+        </element>
+        <element label="Capacity" max_length="40" name="capacity" type="integer"/>
+        <element label="Location" max_length="100" name="location" type="string"/>
+        <element label="Contact Number" max_length="20" name="contact_number" type="string"/>
+        <element display="true" label="Hall Name" max_length="100" name="hall_name" type="string"/>
+        <element label="sport Type" max_length="40" name="sport_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Football" sequence="5" value="football"/>
+                <element inactive_on_update="false" label="Table Tennis" sequence="3" value="table_tennis"/>
+                <element inactive_on_update="false" label="Basketball" sequence="1" value="basketball"/>
+                <element inactive_on_update="false" label="Badminton" sequence="0" value="badminton"/>
+                <element inactive_on_update="false" label="Gym" sequence="7" value="gym"/>
+                <element inactive_on_update="false" label="Multy-Purpose" sequence="8" value="multy_purpose"/>
+                <element inactive_on_update="false" label="Tennis" sequence="6" value="tennis"/>
+                <element inactive_on_update="false" label="Cricket" sequence="4" value="cricket"/>
+                <element inactive_on_update="false" label="Volleyball" sequence="2" value="volleyball"/>
+            </choice>
+        </element>
+        <element label="Facilities" max_length="100" name="facilities" type="string"/>
+    </element>
+</database>

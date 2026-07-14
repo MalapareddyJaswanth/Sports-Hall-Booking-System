@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data_template_predicate">
+    <sys_ux_composite_data_template_predicate action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="task">active=true^EQ<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <custom_condition/>
+        <custom_field_list/>
+        <field_list>number,priority,state,assigned_to.name,assignment_group.name,sys_created_on,description</field_list>
+        <name>Custom Portal Landing - My Tasks Predicate</name>
+        <order/>
+        <predicate_bundle/>
+        <required_roles/>
+        <sys_class_name>sys_ux_composite_data_template_predicate</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-13 17:24:19</sys_created_on>
+        <sys_id>169825b53186031078bac2b2ab613fee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Custom Portal Landing - My Tasks Predicate</sys_name>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_ux_composite_data_template_predicate_169825b53186031078bac2b2ab613fee</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-13 17:24:19</sys_updated_on>
+        <table>task</table>
+        <ux_template display_value="Custom Portal Landing - My Tasks template">129825b54d860310de4cf200463a45f0</ux_template>
+    </sys_ux_composite_data_template_predicate>
+</record_update>

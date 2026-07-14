@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="sport_type" table="x_2112820_sports_2_sports_hall" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>sport_type</element>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sport_type</sys_name>
+            <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+            <sys_update_name>sys_choice_x_2112820_sports_2_sports_hall_sport_type</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Badminton</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>badminton</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Basketball</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>basketball</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Volleyball</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>volleyball</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Table Tennis</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>table_tennis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cricket</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>cricket</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Football</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>football</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tennis</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>6</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>tennis</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Gym</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>7</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>gym</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sport_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Multy-Purpose</label>
+            <language>en</language>
+            <name>x_2112820_sports_2_sports_hall</name>
+            <sequence>8</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-07-13 14:46:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-07-13 14:46:03</sys_updated_on>
+            <value>multy_purpose</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>
