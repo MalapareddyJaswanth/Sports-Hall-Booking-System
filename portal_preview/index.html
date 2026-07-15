@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Hall Booking Portal</title>
+  <!-- Google Fonts Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Blur Blobs for Sleek Aesthetics -->
+  <div class="blur-blob blob-1"></div>
+  <div class="blur-blob blob-2"></div>
+  <div class="blur-blob blob-3"></div>
+
+  <!-- Login Screen Container -->
+  <div class="login-container" id="loginContainer">
+    <div class="card glass-card login-card">
+      <div class="login-header">
+        <div class="logo-icon">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <h2>ActiveReserve</h2>
+        <p>Sports Hall Booking System</p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="role-selector">
+        <button type="button" class="role-tab active" id="roleStudentBtn">
+          <i class="fa-solid fa-graduation-cap"></i> Student
+        </button>
+        <button type="button" class="role-tab" id="roleCoordinatorBtn">
+          <i class="fa-solid fa-user-shield"></i> Coordinator
+        </button>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="loginUsername" id="usernameLabel">Student ID / Roll Number</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="loginUsername" placeholder="e.g. SU2112820" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="loginPassword" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-login" id="loginSubmitBtn">
+          <span class="btn-text">Sign In</span>
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+      </form>
+
+      <div class="quick-credentials">
+        <span class="quick-title">Quick-fill Demo Credentials</span>
+        <div class="quick-btns">
+          <button type="button" class="btn-quick" id="quickStudentBtn">Jaswanth (Student)</button>
+          <button type="button" class="btn-quick" id="quickCoordBtn">Staff (Coordinator)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container hidden" id="appContainer">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <div>
+          <h1>ActiveReserve</h1>
+          <p>Sports Hall Booking System</p>
+        </div>
+      </div>
+      <div class="user-profile-wrapper">
+        <div class="user-profile">
+          <div class="user-avatar" id="userAvatar">JM</div>
+          <div class="user-info">
+            <span class="user-name" id="userName">Jaswanth Malapareddy</span>
+            <span class="user-role" id="userRole">Student (Member)</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="btn-logout" title="Log Out">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+      
+      <!-- Left Column: Hall Selection & Date Selector -->
+      <section class="left-pane">
+        
+        <!-- Step 1: Select Facility -->
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="step-badge">01</span>
+            <h2>Select Sports Facility</h2>
+          </div>
+          <div class="facility-grid" id="facilityGrid">
+            <!-- Facility Cards will be inserted here dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- Step 2: Choose Date -->
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="step-badge">02</span>
+            <h2>Select Date</h2>
+          </div>
+          <div class="date-selector-wrapper">
+            <div class="custom-date-input">
+              <i class="fa-regular fa-calendar-days calendar-icon"></i>
+              <input type="date" id="bookingDate" value="">
+            </div>
+            <p class="helper-text">You can reserve slots up to 7 days in advance.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Availability Grid & Booking Form -->
+      <section class="right-pane">
+        
+        <!-- Step 3: Interactive Slots Grid -->
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="step-badge">03</span>
+            <h2>Time Slot Availability</h2>
+          </div>
+          
+          <!-- Legend -->
+          <div class="legend-bar">
+            <div class="legend-item"><span class="indicator available"></span> Available</div>
+            <div class="legend-item"><span class="indicator pending"></span> Pending Approval</div>
+            <div class="legend-item"><span class="indicator booked"></span> Reserved</div>
+          </div>
+
+          <div class="slots-grid" id="slotsGrid">
+            <!-- Slots will be inserted here dynamically -->
+          </div>
+        </div>
+
+        <!-- Step 4: Submission Form (Hidden until slot is selected) -->
+        <div class="card glass-card hidden" id="bookingFormCard">
+          <div class="card-header">
+            <span class="step-badge">04</span>
+            <h2>Booking Confirmation</h2>
+          </div>
+          <form id="bookingForm" class="booking-form">
+            <div class="form-row summary-row">
+              <div class="summary-pill"><i class="fa-solid fa-building"></i> <span id="summaryFacility">Badminton Court</span></div>
+              <div class="summary-pill"><i class="fa-regular fa-clock"></i> <span id="summaryTime">10:00 - 11:00</span></div>
+              <div class="summary-pill"><i class="fa-regular fa-calendar"></i> <span id="summaryDate">2026-07-15</span></div>
+            </div>
+            <div class="form-group">
+              <label for="studentId">Student ID / Roll Number</label>
+              <input type="text" id="studentId" value="SU2112820" required readonly>
+            </div>
+            <div class="form-group">
+              <label for="remarks">Booking Purpose / Remarks</label>
+              <textarea id="remarks" rows="2" placeholder="e.g., Badminton Practice session with team members Natta, Shaik, Veerla." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-pulse">
+              <span class="btn-text">Confirm Booking Request</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Dashboard: Active Reservations -->
+    <section class="dashboard-section">
+      <div class="card glass-card">
+        <div class="card-header dashboard-header">
+          <h2><i class="fa-solid fa-rectangle-list header-icon"></i> My Bookings Dashboard</h2>
+          <div class="dashboard-stats">
+            <span class="stat-badge"><span class="stat-num" id="pendingCount">0</span> Pending</span>
+            <span class="stat-badge"><span class="stat-num" id="approvedCount">0</span> Approved</span>
+          </div>
+        </div>
+        <div class="dashboard-table-container">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Booking Ref</th>
+                <th>Sports Hall</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Remarks</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsTableBody">
+              <!-- Bookings will be inserted here dynamically -->
+            </tbody>
+          </table>
+          <div class="empty-dashboard-state" id="emptyState">
+            <i class="fa-solid fa-calendar-xmark empty-icon"></i>
+            <p>You have no active bookings. Select a facility and slot above to book!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="toast-message" id="toastMessage">Booking Request Submitted Successfully!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
