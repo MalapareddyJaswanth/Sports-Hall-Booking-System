@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil) {
+  var c = this;
+  // Initialize selected values
+  $scope.selected = {
+    hall: null,
+    dateString: null,
+    slot: null,
+    remarks: ""
+  };
+  
+  $scope.loadingSlots = false;
+  $scope.bookingInProgress = false;
+  $scope.cancelInProgress = false;
+  // Select a facility
+  $scope.selectHall = function(hall) {
+    if (hall.availability_status !== 'available') {
+      spUtil.addErrorMessage("This facility is currently closed or under maintenance.");
+      return;
+    }
+    $scope.selected.hall = hall;
+    $scope.selected.slot = null;
+    if ($scope.selected.dateString) {
+      $scope.fetchSlotAvailability();
+    }
+  };
+  // Triggered on Date Input change
+  $scope.onDateChange = function() {
+    $scope.selected.slot = null;
+    if ($scope.selected.hall && $scope.selected.dateString) {
+      $scope.fetchSlotAvailability();
+    }
+  };
+  // Fetch slot availability from server based on selected hall and date
+  $scope.fetchSlotAvailability = function() {
+    $scope.loadingSlots = true;
+    
+    // Call server with query parameters
+    c.server.get({
+      action: 'get_slots',
+      sports_hall_id: $scope.selected.hall.sys_id,
+      booking_date: $scope.selected.dateString
+    }).then(function(response) {
+      $scope.data.slots = response.data.slots;
+      $scope.loadingSlots = false;
+    }, function(error) {
+      $scope.loadingSlots = false;
+      spUtil.addErrorMessage("Error loading slot availability. Please try again.");
+    });
+  };
+  // Select a specific slot
+  $scope.selectSlot = function(slot) {
+    if (slot.status === 'unavailable') {
+      spUtil.addErrorMessage("This time slot is marked as unavailable.");
+      return;
+    }
+    if (slot.booking_status === 'approved') {
+      spUtil.addErrorMessage("This slot is already booked and approved by another student.");
+      return;
+    }
+    if (slot.booking_status === 'pending') {
+      spUtil.addErrorMessage("This slot has a pending reservation request.");
+      return;
+    }
+    $scope.selected.slot = slot;
+  };
+  // Submit booking request
+  $scope.submitBooking = function() {
+    if (!$scope.selected.hall || !$scope.selected.dateString || !$scope.selected.slot) {
+      spUtil.addErrorMessage("Please fill in all booking details.");
+      return;
+    }
+    
+    $scope.bookingInProgress = true;
+    
+    c.server.get({
+      action: 'submit_booking',
+      sports_hall_id: $scope.selected.hall.sys_id,
+      booking_date: $scope.selected.dateString,
+      time_slot_id: $scope.selected.slot.sys_id,
+      remarks: $scope.selected.remarks
+    }).then(function(response) {
+      $scope.bookingInProgress = false;
+      if (response.data.success) {
+        spUtil.addInfoMessage("Your booking request has been submitted successfully! Booking Number: " + response.data.booking_number);
+        
+        // Reset selections
+        $scope.selected.slot = null;
+        $scope.selected.remarks = "";
+        
+        // Refresh slots view and dashboard
+        $scope.fetchSlotAvailability();
+        $scope.refreshDashboard();
+      } else {
+        spUtil.addErrorMessage(response.data.error_message || "Failed to submit booking request.");
+      }
+    }, function(error) {
+      $scope.bookingInProgress = false;
+      spUtil.addErrorMessage("An unexpected server error occurred.");
+    });
+  };
+  // Cancel booking request
+  $scope.cancelBooking = function(booking) {
+    if (confirm("Are you sure you want to cancel this booking (" + booking.number + ")?")) {
+      $scope.cancelInProgress = true;
+      
+      c.server.get({
+        action: 'cancel_booking',
+        booking_id: booking.sys_id
+      }).then(function(response) {
+        $scope.cancelInProgress = false;
+        if (response.data.success) {
+          spUtil.addInfoMessage("Booking cancelled successfully.");
+          $scope.refreshDashboard();
+          if ($scope.selected.hall && $scope.selected.dateString) {
+            $scope.fetchSlotAvailability();
+          }
+        } else {
+          spUtil.addErrorMessage(response.data.error_message || "Failed to cancel booking.");
+        }
+      }, function(error) {
+        $scope.cancelInProgress = false;
+        spUtil.addErrorMessage("An error occurred while cancelling booking.");
+      });
+    }
+  };
+  // Refresh user dashboard list
+  $scope.refreshDashboard = function() {
+    c.server.get({
+      action: 'get_dashboard'
+    }).then(function(response) {
+      $scope.data.myBookings = response.data.myBookings;
+    });
+  };
+  // Set minimum date picker selection to today
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+  var yyyy = today.getFullYear();
+  $scope.data.minDate = yyyy + '-' + mm + '-' + dd;
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Sports Hall Booking CSS Styles */
+/* Primary Variables and Colors */
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --bg-gradient-start: #1e3a8a;
+  --bg-gradient-end: #3b82f6;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --available-color: #10b981;
+  --booked-color: #ef4444;
+  --pending-color: #f59e0b;
+  --unavailable-color: #64748b;
+  --completed-color: #8b5cf6;
+}
+.sports-booking-container {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+/* Banner Header Styling */
+.booking-banner {
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.booking-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: rotateBanner 20s linear infinite;
+  pointer-events: none;
+}
+@keyframes rotateBanner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.banner-overlay h1 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.banner-overlay p {
+  font-size: 16px;
+  font-weight: 300;
+  max-width: 650px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+/* Content Area layout */
+.booking-content {
+  margin-top: -30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+/* Card Styling */
+.booking-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  margin-bottom: 25px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.booking-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+.sticky-card {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+}
+.card-header-custom {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+}
+.card-header-custom h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-main);
+}
+.step-num {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+.card-body-custom {
+  padding: 24px;
+}
+/* Sports Hall Selection Styles */
+.hall-card {
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+.hall-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+.hall-card.selected {
+  border-color: var(--primary-color);
+  background-color: #f0f7ff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+.hall-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+.hall-body p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+.hall-body p i {
+  width: 16px;
+  margin-right: 8px;
+  color: var(--primary-color);
+}
+.sport-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  display: inline-block;
+}
+/* Sport Types Badges */
+.sport-badge.badminton { background-color: #e0f2fe; color: #0369a1; }
+.sport-badge.basketball { background-color: #ffedd5; color: #c2410c; }
+.sport-badge.volleyball { background-color: #fae8ff; color: #a21caf; }
+.sport-badge.cricket { background-color: #f0fdf4; color: #15803d; }
+.sport-badge.table_tennis { background-color: #ecfdf5; color: #047857; }
+.sport-badge.football { background-color: #fef2f2; color: #b91c1c; }
+.sport-badge.tennis { background-color: #fef9c3; color: #a16207; }
+.sport-badge.gym { background-color: #f1f5f9; color: #334155; }
+.sport-badge.multy_purpose { background-color: #e0e7ff; color: #4338ca; }
+.status-indicator-wrapper {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+}
+.status-indicator.available { background-color: var(--available-color); }
+.status-indicator.under_maintenance { background-color: var(--pending-color); }
+.status-indicator.closed { background-color: var(--booked-color); }
+.status-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+/* Date Picker Custom */
+.date-picker-custom {
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  height: 42px;
+  font-weight: 500;
+}
+.date-picker-custom:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+/* Time Slots Grid Section */
+.slots-section {
+  margin-top: 25px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+.slots-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--text-main);
+}
+.loading-slots {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-muted);
+}
+.slot-card {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  margin-bottom: 15px;
+  transition: all 0.2s ease;
+}
+.slot-card:hover {
+  border-color: var(--primary-color);
+  background-color: #f8fafc;
+}
+.slot-card.selected {
+  border-color: var(--primary-color);
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+.slot-card.booked {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+.slot-card.booked:hover {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+.slot-card.unavailable {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.slot-time {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.slot-name {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.slot-status-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.slot-status-badge.available { background-color: #d1fae5; color: #065f46; }
+.slot-status-badge.booked,
+.slot-status-badge.approved { background-color: #fee2e2; color: #991b1b; }
+.slot-status-badge.pending { background-color: #fef3c7; color: #92400e; }
+.slot-status-badge.unavailable { background-color: #e2e8f0; color: #475569; }
+/* Booking Form Summary Styles */
+.form-placeholder {
+  text-align: center;
+  padding: 40px 10px;
+  color: var(--text-muted);
+}
+.form-placeholder i {
+  font-size: 32px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+.summary-details {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px dashed var(--card-border);
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.summary-item:last-child {
+  margin-bottom: 0;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+.summary-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.summary-value {
+  color: var(--text-main);
+  font-weight: 700;
+}
+.remarks-custom {
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  resize: vertical;
+  min-height: 80px;
+  font-size: 13px;
+}
+.remarks-custom:focus {
+  border-color: var(--primary-color);
+}
+.btn-book {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+  transition: all 0.2s ease;
+}
+.btn-book:hover, .btn-book:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+/* Dashboard Styles */
+.dashboard-section {
+  margin-top: 20px;
+}
+.dashboard-header {
+  justify-content: space-between;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.header-left i {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-right: 10px;
+}
+.btn-refresh {
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+.table-custom {
+  margin-bottom: 0;
+}
+.table-custom th {
+  background-color: #f8fafc;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom-width: 1px !important;
+  padding: 12px 16px !important;
+}
+.table-custom td {
+  padding: 14px 16px !important;
+  font-size: 13px;
+  vertical-align: middle !important;
+  border-top-color: #f1f5f9 !important;
+}
+.remarks-cell {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  text-align: center;
+}
+.status-badge.pending { background-color: #fffbeb; color: #d97706; }
+.status-badge.approved { background-color: #ecfdf5; color: #059669; }
+.status-badge.rejected { background-color: #fef2f2; color: #dc2626; }
+.status-badge.cancelled { background-color: #f1f5f9; color: #475569; }
+.status-badge.completed { background-color: #f5f3ff; color: #7c3aed; }
+.btn-cancel {
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+.empty-dashboard {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-dashboard i {
+  font-size: 42px;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>sports_hall_booking_calendar</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Sports Hall Booking Calendar</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* Server Script for Sports Hall Booking Portal Widget */
+  // Initial Load Configuration
+  if (!input) {
+    data.currentUser = {
+      sys_id: gs.getUserID(),
+      name: gs.getUser().getDisplayName()
+    };
+    
+    // 1. Fetch Sports Halls
+    data.sportsHalls = [];
+    var hallGr = new GlideRecord('x_2112820_sports_2_sports_hall');
+    hallGr.query();
+    while (hallGr.next()) {
+      data.sportsHalls.push({
+        sys_id: hallGr.getUniqueValue(),
+        hall_name: hallGr.getValue('hall_name'),
+        location: hallGr.getValue('location'),
+        capacity: hallGr.getValue('capacity'),
+        contact_number: hallGr.getValue('contact_number'),
+        facilities: hallGr.getValue('facilities'),
+        availability_status: hallGr.getValue('availability_status'),
+        availability_status_label: hallGr.getDisplayValue('availability_status'),
+        sport_type: hallGr.getValue('sport_type'),
+        sport_type_label: hallGr.getDisplayValue('sport_type')
+      });
+    }
+    // 2. Fetch User Dashboard Bookings
+    data.myBookings = getUserDashboardBookings();
+  }
+  // Handle Client AJAX requests
+  if (input) {
+    var action = input.action;
+    // A. Fetch Time Slots with booking availability for selected hall and date
+    if (action === 'get_slots') {
+      var sportsHallId = input.sports_hall_id;
+      var bookingDate = input.booking_date; // Format YYYY-MM-DD
+      
+      data.slots = [];
+      
+      // Fetch all slots configured for this sports hall
+      var slotGr = new GlideRecord('x_2112820_sports_2_time_slot');
+      slotGr.addQuery('sports_hall', sportsHallId);
+      slotGr.orderBy('start_time');
+      slotGr.query();
+      
+      while (slotGr.next()) {
+        var slotId = slotGr.getUniqueValue();
+        var bookingStatus = '';
+        var bookingStatusLabel = '';
+        
+        // Check if there is an active booking request for this slot on this date
+        var checkGr = new GlideRecord('x_2112820_sports_2_booking');
+        checkGr.addQuery('sports_hall', sportsHallId);
+        checkGr.addQuery('booking_date', bookingDate);
+        checkGr.addQuery('time_slot', slotId);
+        // Exclude cancelled/rejected bookings from blocking slots
+        checkGr.addQuery('booking_status', 'IN', 'pending,approved');
+        checkGr.query();
+        
+        if (checkGr.next()) {
+          bookingStatus = checkGr.getValue('booking_status');
+          bookingStatusLabel = checkGr.getDisplayValue('booking_status');
+        }
+        
+        data.slots.push({
+          sys_id: slotId,
+          slot_name: slotGr.getValue('slot_name'),
+          start_time: slotGr.getDisplayValue('start_time'),
+          end_time: slotGr.getDisplayValue('end_time'),
+          status: slotGr.getValue('status'),
+          status_label: slotGr.getDisplayValue('status'),
+          booking_status: bookingStatus,
+          booking_status_label: bookingStatusLabel
+        });
+      }
+    }
+    // B. Submit Reservation Request
+    else if (action === 'submit_booking') {
+      var sportsHallId = input.sports_hall_id;
+      var bookingDate = input.booking_date;
+      var timeSlotId = input.time_slot_id;
+      var remarks = input.remarks;
+      
+      // 1. Double check slot availability to prevent race conditions (Duplicate Prevention)
+      var checkConflict = new GlideRecord('x_2112820_sports_2_booking');
+      checkConflict.addQuery('sports_hall', sportsHallId);
+      checkConflict.addQuery('booking_date', bookingDate);
+      checkConflict.addQuery('time_slot', timeSlotId);
+      checkConflict.addQuery('booking_status', 'approved');
+      checkConflict.query();
+      
+      if (checkConflict.hasNext()) {
+        data.success = false;
+        data.error_message = "This slot is already booked and approved. Please select another slot.";
+        return;
+      }
+      
+      // 2. Insert new Booking record
+      var newBooking = new GlideRecord('x_2112820_sports_2_booking');
+      newBooking.initialize();
+      newBooking.setValue('sports_hall', sportsHallId);
+      newBooking.setValue('booking_date', bookingDate);
+      newBooking.setValue('time_slot', timeSlotId);
+      newBooking.setValue('student', gs.getUserID());
+      newBooking.setValue('remarks', remarks);
+      newBooking.setValue('booking_status', 'pending'); // Starts as Pending, Flow Designer handles routing
+      var newId = newBooking.insert();
+      
+      if (newId) {
+        // Fetch generated Number
+        var refBooking = new GlideRecord('x_2112820_sports_2_booking');
+        if (refBooking.get(newId)) {
+          data.success = true;
+          data.booking_number = refBooking.getValue('number');
+        }
+      } else {
+        data.success = false;
+        data.error_message = "Unable to create booking record in the database.";
+      }
+    }
+    // C. Cancel Reservation Request
+    else if (action === 'cancel_booking') {
+      var bookingId = input.booking_id;
+      
+      var cancelGr = new GlideRecord('x_2112820_sports_2_booking');
+      if (cancelGr.get(bookingId)) {
+        // Security check: ensure user is cancelling their own booking
+        if (cancelGr.getValue('student') === gs.getUserID() || gs.hasRole('x_2112820_sports_2.sports_hall_booking.admin')) {
+          cancelGr.setValue('booking_status', 'cancelled');
+          cancelGr.update();
+          data.success = true;
+        } else {
+          data.success = false;
+          data.error_message = "Unauthorized: You do not have permission to cancel this booking.";
+        }
+      } else {
+        data.success = false;
+        data.error_message = "Booking record not found.";
+      }
+    }
+    // D. Refresh Dashboard Bookings
+    else if (action === 'get_dashboard') {
+      data.myBookings = getUserDashboardBookings();
+    }
+  }
+  // Helper function to query dashboard records
+  function getUserDashboardBookings() {
+    var list = [];
+    var myGr = new GlideRecord('x_2112820_sports_2_booking');
+    myGr.addQuery('student', gs.getUserID());
+    myGr.orderByDesc('sys_created_on');
+    myGr.query();
+    
+    while (myGr.next()) {
+      list.push({
+        sys_id: myGr.getUniqueValue(),
+        number: myGr.getValue('number'),
+        sports_hall_label: myGr.getDisplayValue('sports_hall'),
+        booking_date: myGr.getValue('booking_date'),
+        time_slot_label: myGr.getDisplayValue('time_slot'),
+        booking_status: myGr.getValue('booking_status'),
+        booking_status_label: myGr.getDisplayValue('booking_status'),
+        remarks: myGr.getValue('remarks')
+      });
+    }
+    return list;
+  }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-15 12:35:14</sys_created_on>
+        <sys_id>64a9b25a83ce0710e6d511d6feaad3ac</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Sports Hall Booking Calendar</sys_name>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sp_widget_64a9b25a83ce0710e6d511d6feaad3ac</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-15 12:39:34</sys_updated_on>
+        <template><![CDATA[<div class="sports-booking-container">
+  <!-- Banner Header -->
+  <div class="booking-banner">
+    <div class="banner-overlay">
+      <h1>Sports Hall Booking System</h1>
+      <p>Reserve your sports facility slots in real-time. Automated approvals and instant booking confirmation.</p>
+    </div>
+  </div>
+  <div class="container-fluid booking-content">
+    <div class="row">
+      <!-- Left Column: Facility & Slot Selection -->
+      <div class="col-md-8">
+        
+        <!-- Step 1: Select Facility -->
+        <div class="booking-card">
+          <div class="card-header-custom">
+            <span class="step-num">1</span>
+            <h2>Select Sports Hall / Facility</h2>
+          </div>
+          <div class="card-body-custom">
+            <div class="row">
+              <div class="col-sm-6 col-md-4" ng-repeat="hall in data.sportsHalls">
+                <div class="hall-card" ng-class="{'selected': selected.hall.sys_id == hall.sys_id}" ng-click="selectHall(hall)">
+                  <div class="hall-header">
+                    <span class="sport-badge" ng-class="hall.sport_type">{{hall.sport_type_label}}</span>
+                    <h3>{{hall.hall_name}}</h3>
+                  </div>
+                  <div class="hall-body">
+                    <p><i class="fa fa-map-marker"></i> {{hall.location}}</p>
+                    <p><i class="fa fa-users"></i> Capacity: {{hall.capacity}} people</p>
+                    <p><i class="fa fa-phone"></i> {{hall.contact_number}}</p>
+                    <div class="status-indicator-wrapper">
+                      <span class="status-indicator" ng-class="hall.availability_status"></span>
+                      <span class="status-text">{{hall.availability_status_label}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Step 2: Date & Slot Selection -->
+        <div class="booking-card" ng-if="selected.hall">
+          <div class="card-header-custom">
+            <span class="step-num">2</span>
+            <h2>Choose Date & Time Slot</h2>
+          </div>
+          <div class="card-body-custom">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="bookingDate"><i class="fa fa-calendar"></i> Select Date</label>
+                  <input type="date" id="bookingDate" class="form-control date-picker-custom" 
+                         ng-model="selected.dateString" ng-change="onDateChange()" min="{{data.minDate}}">
+                </div>
+              </div>
+            </div>
+            <!-- Time Slots Grid -->
+            <div class="slots-section" ng-if="selected.dateString">
+              <h4 class="slots-title">Available Time Slots for {{selected.dateString | date:'mediumDate'}}</h4>
+              
+              <div class="loading-slots" ng-if="loadingSlots">
+                <i class="fa fa-spinner fa-spin fa-2x"></i>
+                <p>Loading slots availability...</p>
+              </div>
+              <div class="row" ng-if="!loadingSlots">
+                <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="slot in data.slots">
+                  <div class="slot-card" 
+                       ng-class="{'selected': selected.slot.sys_id == slot.sys_id, 'booked': slot.booking_status == 'approved', 'unavailable': slot.status == 'unavailable' || slot.booking_status == 'pending'}"
+                       ng-click="selectSlot(slot)">
+                    <div class="slot-time">{{slot.start_time}} - {{slot.end_time}}</div>
+                    <div class="slot-name">{{slot.slot_name}}</div>
+                    <span class="slot-status-badge" ng-class="slot.booking_status || slot.status">
+                      {{slot.booking_status_label || slot.status_label}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Column: Booking Form -->
+      <div class="col-md-4">
+        
+        <!-- Step 3: Booking Form -->
+        <div class="booking-card sticky-card">
+          <div class="card-header-custom">
+            <span class="step-num">3</span>
+            <h2>Reservation Details</h2>
+          </div>
+          <div class="card-body-custom">
+            <div ng-if="!selected.hall" class="form-placeholder">
+              <i class="fa fa-info-circle"></i>
+              <p>Please select a sports hall and date to begin reservation request.</p>
+            </div>
+            <div ng-if="selected.hall">
+              <div class="summary-details">
+                <div class="summary-item">
+                  <span class="summary-label">Sports Hall:</span>
+                  <span class="summary-value">{{selected.hall.hall_name}}</span>
+                </div>
+                <div class="summary-item" ng-if="selected.dateString">
+                  <span class="summary-label">Date:</span>
+                  <span class="summary-value">{{selected.dateString}}</span>
+                </div>
+                <div class="summary-item" ng-if="selected.slot">
+                  <span class="summary-label">Time Slot:</span>
+                  <span class="summary-value">{{selected.slot.start_time}} - {{selected.slot.end_time}} ({{selected.slot.slot_name}})</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Student:</span>
+                  <span class="summary-value">{{data.currentUser.name}}</span>
+                </div>
+              </div>
+              <div class="form-group" ng-if="selected.slot">
+                <label for="remarks">Remarks / Purpose</label>
+                <textarea id="remarks" class="form-control remarks-custom" ng-model="selected.remarks" 
+                          placeholder="e.g., Badminton tournament practice, friendly basketball match..."></textarea>
+              </div>
+              <div class="form-actions" ng-if="selected.slot">
+                <button class="btn btn-primary btn-block btn-book" ng-click="submitBooking()" ng-disabled="bookingInProgress">
+                  <span ng-if="!bookingInProgress"><i class="fa fa-check-circle"></i> Confirm Reservation</span>
+                  <span ng-if="bookingInProgress"><i class="fa fa-spinner fa-spin"></i> Submitting...</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Section 4: My Bookings Dashboard -->
+    <div class="row dashboard-section">
+      <div class="col-md-12">
+        <div class="booking-card">
+          <div class="card-header-custom dashboard-header">
+            <div class="header-left">
+              <i class="fa fa-dashboard"></i>
+              <h2>My Reservations Dashboard</h2>
+            </div>
+            <button class="btn btn-default btn-refresh" ng-click="refreshDashboard()">
+              <i class="fa fa-refresh"></i> Refresh
+            </button>
+          </div>
+          <div class="card-body-custom">
+            
+            <div class="table-responsive" ng-if="data.myBookings.length > 0">
+              <table class="table table-custom">
+                <thead>
+                  <tr>
+                    <th>Booking #</th>
+                    <th>Sports Hall</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="booking in data.myBookings">
+                    <td><strong>{{booking.number}}</strong></td>
+                    <td>{{booking.sports_hall_label}}</td>
+                    <td>{{booking.booking_date | date:'mediumDate'}}</td>
+                    <td>{{booking.time_slot_label}}</td>
+                    <td>
+                      <span class="status-badge" ng-class="booking.booking_status">
+                        {{booking.booking_status_label}}
+                      </span>
+                    </td>
+                    <td class="remarks-cell">{{booking.remarks || '--'}}</td>
+                    <td>
+                      <button class="btn btn-danger btn-xs btn-cancel" 
+                              ng-if="booking.booking_status == 'pending' || booking.booking_status == 'approved'" 
+                              ng-click="cancelBooking(booking)" ng-disabled="cancelInProgress">
+                        <i class="fa fa-times"></i> Cancel
+                      </button>
+                      <span ng-if="booking.booking_status != 'pending' && booking.booking_status != 'approved'">--</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="empty-dashboard" ng-if="data.myBookings.length == 0">
+              <i class="fa fa-folder-open-o"></i>
+              <p>You have not made any booking requests yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>64a9b25a83ce0710e6d511d6feaad3ac</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-15 12:35:14</sys_created_on>
+        <sys_id>e8a93a5a83ce0710e6d511d6feaad318</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-15 12:35:14</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>sports_hall_booking_details</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[/**
+ * Email Notification Script (sys_script_email) - sports_hall_booking_details
+ * 
+ * Objective:
+ *   Resolves ServiceNow Reference fields dynamically so emails show readable labels 
+ *   (like Sports Hall Name, Location, and Time range) instead of raw Sys IDs.
+ * 
+ * How to use:
+ *   Add this code in a ServiceNow Email Script named "sports_hall_booking_details".
+ *   Then, inside your email notification HTML, call: ${mail_script:sports_hall_booking_details}
+ */
+(function runMailScript(current, template, email, email_action, event) {
+    // 1. Fetch referenced Sports Hall Details
+    var hallName = "N/A";
+    var location = "N/A";
+    var contact = "N/A";
+    var hallGr = current.sports_hall.getRefRecord();
+    if (hallGr && hallGr.isValidRecord()) {
+        hallName = hallGr.getValue('hall_name') || "N/A";
+        location = hallGr.getValue('location') || "N/A";
+        contact = hallGr.getValue('contact_number') || "N/A";
+    }
+    // 2. Fetch referenced Time Slot details
+    var timeSlotLabel = "N/A";
+    var slotGr = current.time_slot.getRefRecord();
+    if (slotGr && slotGr.isValidRecord()) {
+        var startTime = slotGr.getDisplayValue('start_time') || "";
+        var endTime = slotGr.getDisplayValue('end_time') || "";
+        var slotName = slotGr.getValue('slot_name') || "";
+        timeSlotLabel = startTime + " - " + endTime + " (" + slotName + ")";
+    }
+    // 3. Print the dynamically formatted details table
+    template.print('<div style="font-family: Arial, sans-serif; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background-color: #f8fafc; max-width: 600px; margin-top: 15px;">');
+    template.print('<h3 style="color: #3b82f6; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">Reservation Summary</h3>');
+    template.print('<table style="width: 100%; border-collapse: collapse;">');
+    
+    // Rows
+    printRow("Sports Hall", hallName);
+    printRow("Location", location);
+    printRow("Date", current.getDisplayValue('booking_date'));
+    printRow("Time Slot", timeSlotLabel);
+    printRow("Student", current.student.getDisplayValue());
+    printRow("Remarks", current.getValue('remarks') || "None");
+    
+    template.print('</table>');
+    template.print('</div>');
+    // Inline Helper Function to print HTML table rows
+    function printRow(label, value) {
+        template.print('<tr>');
+        template.print('<td style="padding: 6px 0; font-weight: bold; color: #475569; width: 130px; font-size: 13px; vertical-align: top;">' + label + ':</td>');
+        template.print('<td style="padding: 6px 0; color: #1e293b; font-size: 13px; vertical-align: top;">' + value + '</td>');
+        template.print('</tr>');
+    }
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-07-15 12:49:43</sys_created_on>
+        <sys_id>54acf6de83ce0710e6d511d6feaad37b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sports_hall_booking_details</sys_name>
+        <sys_package display_value="Sports Hall Booking System" source="x_2112820_sports_2">3250cd7583420310e6d511d6feaad30a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Sports Hall Booking System">3250cd7583420310e6d511d6feaad30a</sys_scope>
+        <sys_update_name>sys_script_email_54acf6de83ce0710e6d511d6feaad37b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-07-15 12:49:43</sys_updated_on>
+    </sys_script_email>
+</record_update>
